@@ -1,3 +1,4 @@
+!pip install streamlit cryptography
 import streamlit as st
 from cryptography.fernet import Fernet
 
@@ -34,6 +35,4 @@ if uploaded_file:
     )
 
     st.warning("Save this encryption key:")
-    st.code(key.decode())
-
-    
+    st.code(key.decode())    
