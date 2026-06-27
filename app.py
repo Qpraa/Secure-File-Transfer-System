@@ -1,4 +1,3 @@
-!pip install streamlit cryptography
 import streamlit as st
 from cryptography.fernet import Fernet
 
