@@ -1,25 +1,39 @@
 import streamlit as st
 from cryptography.fernet import Fernet
 
-st.title("Secure File Transfer System")
+st.set_page_config(
+    page_title="Secure File Transfer System",
+    page_icon="🔐"
+)
 
-st.write("AES Encryption based secure file transfer demo")
+st.title("🔐 Secure File Transfer System")
 
-uploaded_file = st.file_uploader("Upload a file")
+st.write(
+    "A secure file transfer application using AES-256 encryption "
+    "to protect files from unauthorized access."
+)
+
+uploaded_file = st.file_uploader("Choose a file")
 
 if uploaded_file:
+
     key = Fernet.generate_key()
+
     cipher = Fernet(key)
 
-    encrypted_file = cipher.encrypt(uploaded_file.read())
+    data = uploaded_file.read()
 
-    st.success("File encrypted successfully")
+    encrypted_data = cipher.encrypt(data)
+
+    st.success("File encrypted successfully!")
 
     st.download_button(
-        "Download Encrypted File",
-        encrypted_file,
+        label="Download Encrypted File",
+        data=encrypted_data,
         file_name="encrypted_file.txt"
     )
 
-    st.info("Keep this key safe:")
+    st.warning("Save this encryption key:")
     st.code(key.decode())
+
+    
